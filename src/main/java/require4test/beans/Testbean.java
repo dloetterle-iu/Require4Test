@@ -1,11 +1,12 @@
 package require4test.beans;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 
-@RequestScoped
+@SessionScoped
 @Named("testbean")
 public class Testbean implements Serializable {
 

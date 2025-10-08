@@ -3,15 +3,20 @@ package entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class User {
-
+@Table(name = "test_run")
+public class TestRun {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private long id;
 
-    public User() {
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "test_case_id")
+    private TestCase testCase;
+
+    public TestRun() {
     }
 
     public long getId() {

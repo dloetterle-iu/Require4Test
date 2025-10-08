@@ -3,15 +3,15 @@ package entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "requirement")
+public class Requirement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private long id;
 
-    public User() {
+    public Requirement() {
     }
 
     public long getId() {
