@@ -7,18 +7,6 @@
 </h:head>
 <h:body>
     <h1>Require4Testing</h1>
-    <h2>Login</h2>
-    <p>
-    <h:outputText rendered="#{!loginBean.userExists}" value="Es existiert noch kein Nutzer. Mit Eingabe der Login-Daten wird ein Admin-Nutzer angelegt."/>
-    </p>
-    <h:form>
-        <h:panelGrid columns="2">
-            <h:outputLabel value="Username" for="usernameinput"/>
-            <h:inputText id="usernameinput" value="#{loginBean.username}" size="40"/>
-            <h:outputLabel value="Passwort" for="passwordinput"/>
-            <h:inputSecret id="passwordinput" value="#{loginBean.password}" size="40"/>
-        </h:panelGrid>
-        <h:commandButton value="Login" action="#{loginBean.login}"/>
-    </h:form>
+    <h2>Index</h2>
 </h:body>
 </html>

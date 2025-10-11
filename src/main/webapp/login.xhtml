@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+<h:head>
+    <title>Require4Testing</title>
+</h:head>
+<h:body>
+    <h1>Require4Testing</h1>
+    <h2>Login</h2>
+    <p>
+    <h:outputText rendered="#{!loginBean.userExists}" value="Es existiert noch kein Nutzer. Mit Eingabe der Login-Daten wird ein Admin-Nutzer angelegt."/>
+    </p>
+    <h:messages globalOnly="false"
+                errorStyle="color: red"
+                infoStyle="color: green"
+                warnStyle="color: orange" />
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Username" for="usernameinput"/>
+            <h:inputText id="usernameinput" value="#{loginBean.username}" size="40" required="true"/>
+            <h:outputLabel value="Passwort" for="passwordinput"/>
+            <h:inputSecret id="passwordinput" value="#{loginBean.password}" size="40" required="true"/>
+        </h:panelGrid>
+        <h:commandButton value="Login" action="#{loginBean.login}" />
+    </h:form>
+</h:body>
+</html>

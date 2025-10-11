@@ -4,6 +4,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.mindrot.jbcrypt.BCrypt;
+import require4test.entities.User;
 import require4test.services.UserManagementService;
 
 @Named("loginBean")
@@ -25,8 +27,23 @@ public class LoginBean {
 
     public String login() {
         System.out.println("Login attempt for user: " + username);
-        // TODO: Implement authentication logic
-        return null; // or return a navigation outcome like "home?faces-redirect=true"
+        if (!userExist) {
+            userManagementService.createUser(username, password, true);
+            System.out.printf("AdminUser created ('%s')%n", username);
+            return "login.xhtml";
+        }
+        User userByUsername = userManagementService.getUserByUsername(username);
+        if (userByUsername == null) {
+            System.out.println("Unknown user");
+            return "login.xhtml";
+        }
+        if (BCrypt.checkpw(password, userByUsername.getPassword())) {
+            System.out.println("User logged in");
+            userManagementService.setCurrentUser(userByUsername);
+            return "index.xhtml";
+        }
+        System.out.println("Wrong password");
+        return "login.xhtml";
     }
 
     // Getters and setters
