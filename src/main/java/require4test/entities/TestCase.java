@@ -1,10 +1,11 @@
-package entities;
+package require4test.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "test_run")
-public class TestRun {
+@Table(name = "test_case")
+public class TestCase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -13,10 +14,10 @@ public class TestRun {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "test_case_id")
-    private TestCase testCase;
+    @JoinColumn(name = "requirement_id")
+    private Requirement requirement;
 
-    public TestRun() {
+    public TestCase() {
     }
 
     public long getId() {

@@ -1,4 +1,4 @@
-package entities;
+package require4test.entities;
 
 import jakarta.persistence.*;
 

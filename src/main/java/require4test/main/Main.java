@@ -1,6 +1,6 @@
-package main;
+package require4test.main;
 
-import entities.User;
+import require4test.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
