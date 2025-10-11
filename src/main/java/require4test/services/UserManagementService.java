@@ -28,7 +28,8 @@ public class UserManagementService implements Serializable {
     }
 
     public boolean usersExist() {
-        int count = EntityManagementService.getEntityManager().createQuery("SELECT COUNT(u) FROM User u", Long.class).getSingleResult().intValue();
+        int count = EntityManagementService.getEntityManager().createQuery("SELECT COUNT(u) FROM User u", Long.class)
+                .getSingleResult().intValue();
         System.out.printf("%d Nutzer vorhanden%n", count);
         return count > 0;
     }

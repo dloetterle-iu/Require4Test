@@ -7,7 +7,8 @@ import jakarta.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagementService {
 
-    private static final EntityManager entityManager = Persistence.createEntityManagerFactory("default").createEntityManager();
+    private static final EntityManager entityManager = Persistence.createEntityManagerFactory("default")
+            .createEntityManager();
 
     public void persist(Object entity) {
         entityManager.getTransaction().begin();
