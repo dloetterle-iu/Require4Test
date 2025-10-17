@@ -11,21 +11,33 @@ public class EntityManagementService {
             .createEntityManager();
 
     public void persist(Object entity) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 
     public void update(Object entity) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(entity);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 
     public void remove(Object entity) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(entity);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 
     public static EntityManager getEntityManager() {

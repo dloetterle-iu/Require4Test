@@ -10,6 +10,7 @@ import require4test.enums.UserRole;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @SessionScoped
 @Named("usermanagementservice")
@@ -19,7 +20,6 @@ public class UserManagementService implements Serializable {
     private static final long serialVersionUID = 4757255153964318449L;
 
     private User currentUser = null;
-
 
     @Inject
     EntityManagementService entityManagementService;
@@ -61,5 +61,21 @@ public class UserManagementService implements Serializable {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public List<User> getUsers() {
+        return EntityManagementService.getEntityManager().createQuery("SELECT u FROM User u", User.class).getResultList();
+    }
+
+    public List<User2UserRole> getUserRoles(User user) {
+        return EntityManagementService.getEntityManager()
+                .createQuery("SELECT r FROM User2UserRole r WHERE r.user = :user", User2UserRole.class)
+                .setParameter("user", user)
+                .getResultList();
+    }
+
+    public String getUserRolesString(User user) {
+        List<User2UserRole> userRoles = getUserRoles(user);
+        return userRoles.stream().map(r -> r.getRole().toString()).reduce("", (a, b) -> a.isEmpty() ? b : a + ", " + b);
     }
 }
