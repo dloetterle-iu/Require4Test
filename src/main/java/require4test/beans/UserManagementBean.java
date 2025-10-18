@@ -40,11 +40,8 @@ public class UserManagementBean implements Serializable {
         return "add_user.xhtml";
     }
 
-    public String getUserRoles(User user) {
-        return userManagementService.getUserRolesString(user);
-    }
-
     public List<User> getUsers() {
+        users = userManagementService.getUsers();
         return users;
     }
 

@@ -1,11 +1,24 @@
 package require4test.beans;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.validator.ValidatorException;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import require4test.services.UserManagementService;
 
-@RequestScoped
+import java.io.Serializable;
+
+@SessionScoped
 @Named("addUserBean")
-public class AddUserBean {
+public class AddUserBean implements Serializable {
+
+    private static final long serialVersionUID = 1750233314497527366L;
+
+    @Inject
+    UserManagementService userManagementService;
 
     private String username;
     private String password;
@@ -18,6 +31,8 @@ public class AddUserBean {
 
     public String createUser() {
         System.out.println("created ;)");
+        userManagementService.createUser(username, password, admin, requirementsEngineer, testcaseCreator, tester,
+                testManager);
         System.out.println(username);
         System.out.println(password);
         System.out.println(confirmPassword);
@@ -91,5 +106,16 @@ public class AddUserBean {
 
     public void setTestManager(boolean testManager) {
         this.testManager = testManager;
+    }
+
+    public void checkPassword(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+        if (!password.equals(confirmPassword)) {
+            throw new ValidatorException(new FacesMessage("Passwörter stimmen nicht überein!"));
+        }
+    }
+
+    public boolean passwordsMatchNotEmpty() {
+        return password != null && !password.isEmpty() && confirmPassword != null && !confirmPassword.isEmpty()
+                && password.equals(confirmPassword);
     }
 }

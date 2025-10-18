@@ -5,8 +5,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.NoResultException;
 import require4test.entities.User;
-import require4test.entities.User2UserRole;
-import require4test.enums.UserRole;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -32,19 +30,18 @@ public class UserManagementService implements Serializable {
         this.currentUser = currentUser;
     }
 
-    public User createUser(String username, String password, boolean admin) {
+    public void createUser(String username, String password, boolean admin, boolean requirementsEngineer,
+                           boolean testManager, boolean testcaseCreator, boolean tester) {
         System.out.println("Creating user " + username);
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setAdmin(admin);
+        user.setRequirementsEngineer(requirementsEngineer);
+        user.setTestcaseCreator(testcaseCreator);
+        user.setTester(tester);
+        user.setTestManager(testManager);
         entityManagementService.persist(user);
-        if (admin) {
-            User2UserRole user2UserRole = new User2UserRole();
-            user2UserRole.setUser(user);
-            user2UserRole.setRole(UserRole.ADMIN);
-            entityManagementService.persist(user2UserRole);
-        }
-        return user;
     }
 
     public boolean usersExist() {
@@ -56,26 +53,16 @@ public class UserManagementService implements Serializable {
 
     public User getUserByUsername(String username) {
         try {
-            return (User) EntityManagementService.getEntityManager().createQuery("SELECT u FROM User u WHERE u.username = :username")
-                    .setParameter("username", username).getSingleResult();
+            return (User) EntityManagementService.getEntityManager()
+                    .createQuery("SELECT u FROM User u WHERE u.username = :username").setParameter("username", username)
+                    .getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
     }
 
     public List<User> getUsers() {
-        return EntityManagementService.getEntityManager().createQuery("SELECT u FROM User u", User.class).getResultList();
-    }
-
-    public List<User2UserRole> getUserRoles(User user) {
-        return EntityManagementService.getEntityManager()
-                .createQuery("SELECT r FROM User2UserRole r WHERE r.user = :user", User2UserRole.class)
-                .setParameter("user", user)
+        return EntityManagementService.getEntityManager().createQuery("SELECT u FROM User u", User.class)
                 .getResultList();
-    }
-
-    public String getUserRolesString(User user) {
-        List<User2UserRole> userRoles = getUserRoles(user);
-        return userRoles.stream().map(r -> r.getRole().toString()).reduce("", (a, b) -> a.isEmpty() ? b : a + ", " + b);
     }
 }

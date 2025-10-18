@@ -18,7 +18,8 @@ public class LoginFilter extends HttpFilter {
     UserManagementService userManagementService;
 
     @Override
-    protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         String requestURI = request.getRequestURI();
         if (requestURI.endsWith("login.xhtml")) {
             chain.doFilter(request, response);

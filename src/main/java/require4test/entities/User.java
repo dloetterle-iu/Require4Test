@@ -21,6 +21,12 @@ public class User {
     private String username;
     private String password;
 
+    private boolean admin;
+    private boolean requirementsEngineer;
+    private boolean testManager;
+    private boolean testcaseCreator;
+    private boolean tester;
+
     public User() {
     }
 
@@ -38,5 +44,53 @@ public class User {
 
     public void setPassword(String password) {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public boolean isRequirementsEngineer() {
+        return requirementsEngineer;
+    }
+
+    public void setRequirementsEngineer(boolean requirementsEngineer) {
+        this.requirementsEngineer = requirementsEngineer;
+    }
+
+    public boolean isTestcaseCreator() {
+        return testcaseCreator;
+    }
+
+    public void setTestcaseCreator(boolean testcaseCreator) {
+        this.testcaseCreator = testcaseCreator;
+    }
+
+    public boolean isTester() {
+        return tester;
+    }
+
+    public void setTester(boolean tester) {
+        this.tester = tester;
+    }
+
+    public boolean isTestManager() {
+        return testManager;
+    }
+
+    public void setTestManager(boolean testManager) {
+        this.testManager = testManager;
     }
 }

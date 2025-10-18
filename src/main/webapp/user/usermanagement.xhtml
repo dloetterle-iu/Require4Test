@@ -15,14 +15,30 @@
         <a href="../requirements.xhtml">Requirements</a>
     </div>
     <h:form>
-        <h:dataTable var="user" value="#{userManagementBean.users}">
+        <h:dataTable var="user" value="#{userManagementBean.users}" border="1">
             <h:column>
                 <f:facet name="header">Username</f:facet>
                 <h:outputText value="#{user.username}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">Rollen</f:facet>
-                <h:outputText value="#{userManagementBean.getUserRoles(user)}"/>
+                <f:facet name="header">Admin</f:facet>
+                <h:selectBooleanCheckbox value="#{user.admin}" disabled="true"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Requirements Engineer</f:facet>
+                <h:selectBooleanCheckbox value="#{user.requirementsEngineer}" disabled="true"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Testmanager</f:facet>
+                <h:selectBooleanCheckbox value="#{user.testManager}" disabled="true"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Testfallersteller</f:facet>
+                <h:selectBooleanCheckbox value="#{user.testcaseCreator}" disabled="true"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Tester</f:facet>
+                <h:selectBooleanCheckbox value="#{user.tester}" disabled="true"/>
             </h:column>
             <h:column>
                 <h:commandButton value="Bearbeiten" action="#{userManagementBean.editUser(user)}"/>

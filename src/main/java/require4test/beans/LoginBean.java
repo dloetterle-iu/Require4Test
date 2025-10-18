@@ -28,7 +28,7 @@ public class LoginBean {
     public String login() {
         System.out.println("Login attempt for user: " + username);
         if (!userExist) {
-            userManagementService.createUser(username, password, true);
+            userManagementService.createUser(username, password, true, false, false, false, false);
             System.out.printf("AdminUser created ('%s')%n", username);
             return "login.xhtml";
         }
