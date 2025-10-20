@@ -1,12 +1,16 @@
 package require4test.beans;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import require4test.entities.User;
 
-@RequestScoped
+import java.io.Serializable;
+
+@SessionScoped
 @Named("editUserBean")
-public class EditUserBean {
+public class EditUserBean implements Serializable {
+
+    private static final long serialVersionUID = -4648137104288889592L;
 
     private User user;
     private String oldPassword;
@@ -18,7 +22,19 @@ public class EditUserBean {
     private boolean tester;
     private boolean testManager;
 
-    public String editUser() {
+    public String editUser(User user) {
+        System.out.println("Method called");
+        this.user = user;
+        this.admin = user.isAdmin();
+        this.requirementsEngineer = user.isRequirementsEngineer();
+        this.testcaseCreator = user.isTestcaseCreator();
+        this.tester = user.isTester();
+        this.testManager = user.isTestManager();
+        return "edit_user.xhtml";
+    }
+
+    public String confirm() {
+        System.out.println("Confirm called");
         return "usermanagement.xhtml";
     }
 

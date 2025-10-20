@@ -24,16 +24,9 @@ public class UserManagementBean implements Serializable {
 
     private List<User> users = new ArrayList<>();
 
-    private User userToEdit;
-
     @PostConstruct
     public void init() {
         users = userManagementService.getUsers();
-    }
-
-    public String editUser(User user) {
-        this.userToEdit = user;
-        return "edit_user.xhtml";
     }
 
     public String addUser() {
@@ -43,13 +36,5 @@ public class UserManagementBean implements Serializable {
     public List<User> getUsers() {
         users = userManagementService.getUsers();
         return users;
-    }
-
-    public User getUserToEdit() {
-        return userToEdit;
-    }
-
-    public void setUserToEdit(User userToEdit) {
-        this.userToEdit = userToEdit;
     }
 }

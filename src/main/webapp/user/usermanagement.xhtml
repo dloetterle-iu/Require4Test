@@ -40,8 +40,8 @@
                 <f:facet name="header">Tester</f:facet>
                 <h:selectBooleanCheckbox value="#{user.tester}" disabled="true"/>
             </h:column>
-            <h:column>
-                <h:commandButton value="Bearbeiten" action="#{userManagementBean.editUser(user)}"/>
+            <h:column rendered="#{usermanagementservice.currentUser.admin}">
+                <h:commandButton value="Bearbeiten" action="#{editUserBean.editUser(user)}"/>
             </h:column>
         </h:dataTable>
         <h:commandLink value="Nutzer hinzufügen" action="#{userManagementBean.addUser()}"/>

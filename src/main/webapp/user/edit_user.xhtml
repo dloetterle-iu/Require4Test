@@ -15,16 +15,16 @@
     </div>
     <h:form>
         <h:panelGrid columns="2">
-            <h:outputLabel value="Username" for="usernameinput"/>
-            <h:inputText id="usernameinput" value="#{editUserBean.user.username}" size="40" readonly="true"/>
+            <h:outputLabel value="Username" for="username"/>
+            <h:outputText id="username" value="#{editUserBean.user.username}" size="40" readonly="true"/>
             <h:outputLabel value="altes Passwort" for="oldPassword"/>
             <h:inputSecret id="oldPassword" value="#{editUserBean.oldPassword}" size="40" required="true"/>
             <h:outputLabel value="neues Passwort" for="newPassword"/>
-            <h:inputText id="newPassword" value="#{editUserBean.newPassword}" size="40" required="true"/>
+            <h:inputSecret id="newPassword" value="#{editUserBean.newPassword}" size="40" required="true"/>
             <h:outputLabel value="neues Passwort bestätigen" for="confirmPassword"/>
-            <h:inputText id="confirmPassword" value="#{editUserBean.confirmPassword}" size="40" required="true"/>
+            <h:inputSecret id="confirmPassword" value="#{editUserBean.confirmPassword}" size="40" required="true"/>
         </h:panelGrid>
-        <h:commandButton value="Bestätigen" action="#{editUserBean.}"/>
+        <h:commandButton value="Bestätigen" action="#{editUserBean.confirm()}"/>
     </h:form>
 </h:body>
 </html>
