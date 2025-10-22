@@ -65,4 +65,8 @@ public class UserManagementService implements Serializable {
         return EntityManagementService.getEntityManager().createQuery("SELECT u FROM User u", User.class)
                 .getResultList();
     }
+
+    public void deleteUser(User user) {
+        entityManagementService.remove(user);
+    }
 }

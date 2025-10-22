@@ -4,18 +4,17 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import require4test.entities.User;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @SessionScoped
 @Named("editUserBean")
 public class EditUserBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -4648137104288889592L;
 
     private User user;
-    private String oldPassword;
-    private String newPassword;
-    private String confirmPassword;
     private boolean admin;
     private boolean requirementsEngineer;
     private boolean testcaseCreator;
@@ -35,6 +34,11 @@ public class EditUserBean implements Serializable {
 
     public String confirm() {
         System.out.println("Confirm called");
+        user.setAdmin(admin);
+        user.setRequirementsEngineer(requirementsEngineer);
+        user.setTestcaseCreator(testcaseCreator);
+        user.setTester(tester);
+        user.setTestManager(testManager);
         return "usermanagement.xhtml";
     }
 
@@ -44,30 +48,6 @@ public class EditUserBean implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getOldPassword() {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public boolean isAdmin() {

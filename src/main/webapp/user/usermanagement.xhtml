@@ -43,6 +43,10 @@
             <h:column rendered="#{usermanagementservice.currentUser.admin}">
                 <h:commandButton value="Bearbeiten" action="#{editUserBean.editUser(user)}"/>
             </h:column>
+            <h:column rendered="#{usermanagementservice.currentUser.admin}">
+                <h:commandButton value="Löschen" action="#{usermanagementservice.deleteUser(user)}"
+                                 rendered="#{usermanagementservice.currentUser.username != user.username}"/>
+            </h:column>
         </h:dataTable>
         <h:commandLink value="Nutzer hinzufügen" action="#{userManagementBean.addUser()}"/>
     </h:form>

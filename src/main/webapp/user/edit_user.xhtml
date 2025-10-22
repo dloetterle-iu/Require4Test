@@ -17,12 +17,21 @@
         <h:panelGrid columns="2">
             <h:outputLabel value="Username" for="username"/>
             <h:outputText id="username" value="#{editUserBean.user.username}" size="40" readonly="true"/>
-            <h:outputLabel value="altes Passwort" for="oldPassword"/>
-            <h:inputSecret id="oldPassword" value="#{editUserBean.oldPassword}" size="40" required="true"/>
-            <h:outputLabel value="neues Passwort" for="newPassword"/>
-            <h:inputSecret id="newPassword" value="#{editUserBean.newPassword}" size="40" required="true"/>
-            <h:outputLabel value="neues Passwort bestätigen" for="confirmPassword"/>
-            <h:inputSecret id="confirmPassword" value="#{editUserBean.confirmPassword}" size="40" required="true"/>
+
+            <h:outputLabel value="Admin" for="admin"/>
+            <h:selectBooleanCheckbox id="admin" value="#{editUserBean.admin}"/>
+
+            <h:outputLabel value="Requirements Engineer" for="requirementsEngineer"/>
+            <h:selectBooleanCheckbox id="requirementsEngineer" value="#{editUserBean.requirementsEngineer}"/>
+
+            <h:outputLabel value="Testmanager" for="testManager"/>
+            <h:selectBooleanCheckbox id="testManager" value="#{editUserBean.testManager}"/>
+
+            <h:outputLabel value="Testfallersteller" for="testCaseCreator"/>
+            <h:selectBooleanCheckbox id="testCaseCreator" value="#{editUserBean.testcaseCreator}"/>
+
+            <h:outputLabel value="Tester" for="tester"/>
+            <h:selectBooleanCheckbox id="tester" value="#{editUserBean.tester}"/>
         </h:panelGrid>
         <h:commandButton value="Bestätigen" action="#{editUserBean.confirm()}"/>
     </h:form>
